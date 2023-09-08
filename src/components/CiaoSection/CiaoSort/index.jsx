@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import BtnSortUsersById from "./BtnSortUsersById";
 import BtnSortUsersByFirstName from "./BtnSortUsersByFirstName";
 import BtnSortUsersByLastName from "./BtnSortUsersByLastName";
 
-class CiaoSort extends Component {
-  sortUsersById = () => {
-    const { users, isSortIdUp, setSortId } = this.props;
+const CiaoSort = (props) => {
+  const sortUsersById = () => {
+    const { users, isSortIdUp, setSortId } = props;
     const newUsers = JSON.parse(JSON.stringify(users));
     newUsers.sort((a, b) => {
       if (isSortIdUp) {
@@ -17,8 +17,8 @@ class CiaoSort extends Component {
     setSortId(newUsers);
   };
 
-  sortUsersByFirstName = () => {
-    const { users, isSortFirstNameUp, setSortFirstName } = this.props;
+  const sortUsersByFirstName = () => {
+    const { users, isSortFirstNameUp, setSortFirstName } = props;
     const newUsers = JSON.parse(JSON.stringify(users));
     newUsers.sort((a, b) => {
       if (a.firstName > b.firstName) {
@@ -33,8 +33,8 @@ class CiaoSort extends Component {
     setSortFirstName(newUsers);
   };
 
-  sortUsersByLastName = () => {
-    const { users, isSortLastNameUp, setSortLastName } = this.props;
+  const sortUsersByLastName = () => {
+    const { users, isSortLastNameUp, setSortLastName } = props;
     const newUsers = JSON.parse(JSON.stringify(users));
     newUsers.sort((a, b) => {
       if (a.lastName > b.lastName) {
@@ -48,16 +48,21 @@ class CiaoSort extends Component {
 
     setSortLastName(newUsers);
   };
-  render() {
-    const { isSortIdUp, isSortFirstNameUp, isSortLastNameUp } = this.props;
-    return (
-      <div>
-        <BtnSortUsersById isSortIdUp={isSortIdUp} sortUsersById={this.sortUsersById}/>
-        <BtnSortUsersByFirstName isSortFirstNameUp={isSortFirstNameUp} sortUsersByFirstName={this.sortUsersByFirstName} />
-        <BtnSortUsersByLastName isSortLastNameUp={isSortLastNameUp} sortUsersByLastName={this.sortUsersByLastName} />
-      </div>
-    );
-  }
-}
+
+  const { isSortIdUp, isSortFirstNameUp, isSortLastNameUp } = props;
+  return (
+    <div>
+      <BtnSortUsersById isSortIdUp={isSortIdUp} sortUsersById={sortUsersById} />
+      <BtnSortUsersByFirstName
+        isSortFirstNameUp={isSortFirstNameUp}
+        sortUsersByFirstName={sortUsersByFirstName}
+      />
+      <BtnSortUsersByLastName
+        isSortLastNameUp={isSortLastNameUp}
+        sortUsersByLastName={sortUsersByLastName}
+      />
+    </div>
+  );
+};
 
 export default CiaoSort;

@@ -1,14 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import Ciao from "../Ciao";
 
-class CiaoList extends Component {
-  createList = ({ firstName, lastName, id }) => (
+const CiaoList = (props) => {
+  const createList = ({ firstName, lastName, id }) => (
     <Ciao key={id} name={firstName} lname={lastName} id={id}></Ciao>
   );
-  render() {
-    const { users } = this.props;
-    return <div>{users.map(this.createList)}</div>;
-  }
-}
+
+  const { users } = props;
+  return <div>{users.map(createList)}</div>;
+};
 
 export default CiaoList;
