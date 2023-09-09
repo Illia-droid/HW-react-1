@@ -1,0 +1,8 @@
+.container{
+    width: 50vw;
+    min-width: 400px;
+    margin: auto;
+    margin-top: 15px;
+    border: 3px double #aaa;
+    background-color: aqua;
+}
