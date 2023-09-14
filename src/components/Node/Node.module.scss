@@ -1,0 +1,22 @@
+@use "/src/common/styles/colors" as *;
+
+%border {
+  border: {
+    width: 3px;
+    color: $colorMain;
+    style: double;
+    radius: 10px;
+  }
+}
+
+.note {
+  @extend %border;
+  text-align: center;
+  padding: 1rem;
+  &__h2 {
+    color: $colorMain;
+  }
+  >p{
+    font-size: 2rem;
+  }
+}
