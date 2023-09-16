@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./UsersLoader.module.scss";
 import { getUsers } from "../../api";
 import Error from "../Error";
+import Spinner from "../Spinner";
 
 class UsersLoader extends Component {
   constructor(props) {
@@ -21,6 +22,9 @@ class UsersLoader extends Component {
     });
     getUsers({ page: currentPage, results: currentResults })
       .then((data) => {
+        if(data.error){
+          throw new Error()
+        }
         this.setState({
           users: data.results,
         });
@@ -96,9 +100,7 @@ class UsersLoader extends Component {
           </select>
         </div>
         <ul className={styles.userList}>
-          {isFetching && (
-            <h2 className={styles.loadingIndicator}>Loading...</h2>
-          )}
+          {isFetching && <Spinner />}
           {isFetching ||
             users.map((user) => (
               <li key={user.login.uuid}>{JSON.stringify(user.email)}</li>
