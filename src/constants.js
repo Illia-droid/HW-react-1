@@ -4,14 +4,22 @@ export const USERS = [
   { id: 3, firstName: "Tom", lastName: "Rot" },
 ];
 export const COLORS = {
-MAIN:'pink',
-PITFALL:'gold',
-DEPRECATE:'red',
-}
+  MAIN: "pink",
+  PITFALL: "gold",
+  DEPRECATE: "red",
+};
 
-export const FLEXSETTINGS ={
-  DISPLAY: 'flex',
-    FLEXDIRECTION: 'row',
-    JUSTIFYCONTENT: 'space-between',
-    ALIGNITEMS: 'center',
-}
+export const FLEXSETTINGS = {
+  DISPLAY: "flex",
+  FLEXDIRECTION: "row",
+  JUSTIFYCONTENT: "space-between",
+  ALIGNITEMS: "center",
+};
+
+export const API = {
+  URL: "https://randomuser.me/api/",
+  RESULTS: 5,
+  PAGE: 1,
+  KEY: "fm20231",
+  NAT: "gb",
+};

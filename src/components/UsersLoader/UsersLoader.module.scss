@@ -1,0 +1,73 @@
+.userSection {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .pagination {
+    display: flex;
+    align-items: center;
+
+    .disabledButton {
+      background-color: #ccc;
+      border-color: #ccc;
+      color: #888;
+      cursor: not-allowed;
+    }
+    button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+    .selectLabel {
+      font-size: 1.2rem;
+      margin-right: 10px;
+    }
+
+    .selectInput {
+      padding: 5px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+
+      &:focus {
+        outline: none;
+        border-color: #007bff;
+      }
+    }
+
+    .selectInput option {
+      background-color: #fff;
+      color: #333;
+    }
+    .currentPage {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+  }
+
+  .userList {
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding: 5px 0;
+    }
+  }
+
+  .loadingIndicator {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #007bff;
+  }
+}
