@@ -18,7 +18,7 @@ class LoaderData extends Component {
     this.setState({ isFetching: true });
     loadData()
       .then((data) => {
-        this.setState({ data: data });
+        this.setState({ data });
       })
       .catch((error) => {
         this.setState({ error });
