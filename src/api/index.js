@@ -12,7 +12,7 @@ export const getUsers = (options = {}) => {
     results: API.RESULTS,
     page: API.PAGE,
     seed: API.KEY,
-    nat:API.NAT,
+    nat: API.NAT,
   };
   const readyOptions = { ...defaultOptions, ...options };
 
@@ -20,3 +20,12 @@ export const getUsers = (options = {}) => {
     (response) => response.json()
   );
 };
+
+export const getUserJSON = () =>
+  fetch("/data/users.json").then((res) => res.json());
+
+  export const getEventsSON = () =>
+  fetch("/data/events.json").then((res) => res.json());
+
+  export const getProductsSON = () =>
+  fetch("/data/products.json").then((res) => res.json());
