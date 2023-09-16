@@ -83,7 +83,7 @@ class UsersLoader extends Component {
           </button>
           <span className={styles.currentPage}>{currentPage}</span>
           <button onClick={this.nextPage}>next &gt;</button>
-          <label for="currentResults" className={styles.selectLabel}>
+          <label htmlFor="currentResults" className={styles.selectLabel}>
             Choose currentResults:
           </label>
           <select
