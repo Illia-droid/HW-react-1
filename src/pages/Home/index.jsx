@@ -1,11 +1,11 @@
 import React from "react";
-
 import styles from "./Home.module.scss";
 import CardUsers from "../../components/CardSection/CardUser";
-import { LanguageContext } from "../../contexts";
 import { LANGUAGE } from "../../constants";
-const Home = () => {
-  const render = ([language]) => {
+import { withLanguage } from "../../components/HOCs";
+
+const Home = (props) => {
+  const {language} = props;
     return (
       <>
         <div className={styles.spinner}>{language===LANGUAGE.UKRAINIAN?'Домашня':'Home'}</div>
@@ -14,7 +14,4 @@ const Home = () => {
     );
   };
 
-  return <LanguageContext.Consumer>{render}</LanguageContext.Consumer>;
-};
-
-export default Home;
+export default withLanguage(Home);

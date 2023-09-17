@@ -3,8 +3,8 @@ import styles from "./UsersLoader.module.scss";
 import { getUsers } from "../../api";
 import Error from "../Error";
 import Spinner from "../Spinner";
-import { LanguageContext } from "../../contexts";
 import { LANGUAGE } from "../../constants";
+import { withLanguage } from "../HOCs";
 
 class UsersLoader extends Component {
   constructor(props) {
@@ -72,7 +72,7 @@ class UsersLoader extends Component {
     if (error) {
       return <Error />;
     }
-    const render = ([language]) => {
+    const {language} = this.props;
       return (
         <section className={styles.userSection}>
           <h2>{language === LANGUAGE.UKRAINIAN ? "Користувачі" : "Users"}: </h2>
@@ -112,7 +112,5 @@ class UsersLoader extends Component {
         </section>
       );
     };
-    return <LanguageContext.Consumer>{render}</LanguageContext.Consumer>;
   }
-}
-export default UsersLoader;
+export default withLanguage(UsersLoader);

@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { THEMES } from "./constants";
 import { LANGUAGE } from "./constants";
 import Main from "./components/Main";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +20,7 @@ class App extends Component {
         avatar: "https://api.ambr.top/assets/UI/UI_AvatarIcon_PlayerBoy.png",
       },
       theme: THEMES.LIGHT,
-      language: LANGUAGE.UKRAINIAN,
+      language: LANGUAGE.ENGLISH,
     };
   }
 

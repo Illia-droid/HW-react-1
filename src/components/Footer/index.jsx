@@ -1,34 +1,23 @@
 import React from "react";
 import cx from "classnames";
-import { LanguageContext, ThemeContext } from "../../contexts";
 import styles from "./Footer.module.scss";
-import { LANGUAGE, THEMES } from "../../constants";
+import { THEMES } from "../../constants";
+import { withTheme } from "../HOCs";
+import SwitchLanguage from "../SwitchLanguage";
 
-const Footer = () => {
-  const render = ([language, changeLanguage]) => {
-    return (
-      <ThemeContext.Consumer>
-        {([theme]) => {
-          const classes = cx(styles.container, {
-            [styles.light]: theme === THEMES.LIGHT,
-            [styles.dark]: theme === THEMES.DARK,
-          });
-          return (
-            <>
-              <div className={classes}>
-                &copy;2023
-                <button onClick={changeLanguage}>
-                  {language === LANGUAGE.UKRAINIAN ? "ENGLISH" : "УКРАЇНСЬКА"}
-                </button>
-              </div>
-            </>
-          );
-        }}
-      </ThemeContext.Consumer>
-    );
-  };
-
-  return <LanguageContext.Consumer>{render}</LanguageContext.Consumer>;
+const Footer = ({ theme }) => {
+  const classes = cx(styles.container, {
+    [styles.light]: theme === THEMES.LIGHT,
+    [styles.dark]: theme === THEMES.DARK,
+  });
+  return (
+    <>
+      <div className={classes}>
+        &copy;2023
+        <SwitchLanguage />
+      </div>
+    </>
+  );
 };
 
-export default Footer;
+export default withTheme(Footer);
