@@ -1,24 +1,39 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { UserContext } from "../../../contexts";
+import cx from "classnames";
+import { UserContext, ThemeContext } from "../../../contexts";
+import styles from "./CardUser.module.scss";
+import { THEMES } from "../../../constants";
 const CardUsers = () => {
-  const renderFunc = ({
-    user: { id, firstName, lastName, isSelect },
-    selectUser,
-  }) => {
-    const selectHandler = () => {
-      selectUser(id);
-    };
-    const styles = { backgroundColor: isSelect ? "pink" : "gray" };
+  const render = ([theme]) => {
     return (
-      <article onClick={selectHandler} style={styles}>
-        <h3>
-          {firstName} {lastName}
-        </h3>
-      </article>
+      <UserContext.Consumer>
+        {({
+          user: { id, firstName, lastName, isSelect, avatar },
+          selectUser,
+        }) => {
+          const selectHandler = () => {
+            selectUser(id);
+          };
+          const stylesBgc = { backgroundColor: isSelect ? "pink" : "gray" };
+          const classes = cx(styles.container, {
+            [styles.light]: theme === THEMES.LIGHT,
+            [styles.dark]: theme === THEMES.DARK,
+          });
+          return (
+            <article onClick={selectHandler} className={classes}>
+              <h3 style={stylesBgc}>
+                {firstName} {lastName}
+              </h3>
+              <img src={avatar} alt="avatar" />
+            </article>
+          );
+        }}
+      </UserContext.Consumer>
     );
   };
-  return <UserContext.Consumer>{renderFunc}</UserContext.Consumer>;
+
+  return <ThemeContext.Consumer>{render}</ThemeContext.Consumer>;
 };
 
 export const userSHape = PropTypes.shape({

@@ -1,26 +1,12 @@
 import React, { Component } from "react";
-import { UserContext } from "./contexts";
+import { ThemeContext, UserContext, LanguageContext } from "./contexts";
 import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NavMenu from "./components/NavMenu";
-import Home from "./pages/Home";
-import UsersPage from "./pages/UsersPage";
-import Page404 from "./pages/Page404";
-import LoaderPage from "./pages/LoaderPage";
-import UsersBlock from "./pages/LoaderPage/UsersBlock";
-import EventsBlock from "./pages/LoaderPage/EventsBlock";
-import ProductsBlock from "./pages/LoaderPage/ProductsBlock";
-// function App() {
-//   return (
-//     <BrowserRouter>
-//       <NavMenu />
-//
-//     </BrowserRouter>
-//   );
-// }
-
+import { BrowserRouter } from "react-router-dom";
+import { THEMES } from "./constants";
+import { LANGUAGE } from "./constants";
+import Main from "./components/Main";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -30,35 +16,45 @@ class App extends Component {
         firstName: "Brad",
         lastName: "Pitt",
         isSelect: false,
+        avatar: "https://api.ambr.top/assets/UI/UI_AvatarIcon_PlayerBoy.png",
       },
+      theme: THEMES.LIGHT,
+      language: LANGUAGE.UKRAINIAN,
     };
   }
+
+  changeTheme = () => {
+    this.setState({
+      theme: this.state.theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT,
+    });
+  };
+  changeLanguage = () => {
+    this.setState({
+      language:
+        this.state.language === LANGUAGE.ENGLISH
+          ? LANGUAGE.UKRAINIAN
+          : LANGUAGE.ENGLISH,
+    });
+  };
   selectUser = (id) => {
     this.setState({
       user: { ...this.state.user, isSelect: !this.state.user.isSelect },
     });
   };
   render() {
-    const { user } = this.state;
+    const { user, theme, language } = this.state;
     return (
-      <UserContext.Provider value={{ user, selectUser: this.selectUser }}>
-        <BrowserRouter>
-          <Header />
-          <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/users" element={<UsersPage />} />
-              <Route path="/loader/" element={<LoaderPage />}>
-                <Route path="users" element={<UsersBlock />} />
-                <Route path="events" element={<EventsBlock />} />
-                <Route path="prosucts" element={<ProductsBlock />} />
-                <Route path="*" element={<Page404 />} />
-              </Route>
-            </Routes>
-          </main>
-          <Footer />
-        </BrowserRouter>
-      </UserContext.Provider>
+      <LanguageContext.Provider value={[language, this.changeLanguage]}>
+        <ThemeContext.Provider value={[theme, this.changeTheme]}>
+          <UserContext.Provider value={{ user, selectUser: this.selectUser }}>
+            <BrowserRouter>
+              <Header />
+              <Main />
+              <Footer />
+            </BrowserRouter>
+          </UserContext.Provider>
+        </ThemeContext.Provider>
+      </LanguageContext.Provider>
     );
   }
 }
