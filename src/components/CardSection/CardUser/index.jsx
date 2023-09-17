@@ -1,21 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
-const CardUsers = (props) => {
-  const {
+import { UserContext } from "../../../contexts";
+const CardUsers = () => {
+  const renderFunc = ({
     user: { id, firstName, lastName, isSelect },
     selectUser,
-  } = props;
-  const selectHandler = () => {
-    selectUser(id);
+  }) => {
+    const selectHandler = () => {
+      selectUser(id);
+    };
+    const styles = { backgroundColor: isSelect ? "pink" : "gray" };
+    return (
+      <article onClick={selectHandler} style={styles}>
+        <h3>
+          {firstName} {lastName}
+        </h3>
+      </article>
+    );
   };
-  const styles = { backgroundColor: isSelect ? "pink" : "gray" };
-  return (
-    <article onClick={selectHandler} style={styles}>
-      <h3>
-        {firstName} {lastName}
-      </h3>
-    </article>
-  );
+  return <UserContext.Consumer>{renderFunc}</UserContext.Consumer>;
 };
 
 export const userSHape = PropTypes.shape({
