@@ -12,6 +12,27 @@ const NavMenu = (props) => {
             {language === LANGUAGE.UKRAINIAN ? "Домашня" : "Home"}
           </NavLink>
         </li>
+
+        <li>
+          <NavLink to="/sign-up">
+            {language === LANGUAGE.UKRAINIAN ? "Зареєструватися" : "Sign Up"}
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/sign-in">
+            {language === LANGUAGE.UKRAINIAN ? "Увійти" : "Sign In"}
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/callback">
+            {language === LANGUAGE.UKRAINIAN ? "callback" : "callback"}
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/stopwatch">
+            {language === LANGUAGE.UKRAINIAN ? "Секундометр" : "Sstopwatch"}
+          </NavLink>
+        </li>
         <li>
           <NavLink to="/users">
             {language === LANGUAGE.UKRAINIAN ? "Користувачі" : "Users"}

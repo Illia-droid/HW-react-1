@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { THEMES } from "./constants";
 import { LANGUAGE } from "./constants";
 import Main from "./components/Main";
+import LearnHooks from "./components/LearnHooks";
 
 class App extends Component {
   constructor(props) {
@@ -50,6 +51,7 @@ class App extends Component {
           <UserContext.Provider value={{ user, selectUser: this.selectUser }}>
             <BrowserRouter>
               <Header />
+              <LearnHooks />
               <Main />
               <Footer />
             </BrowserRouter>

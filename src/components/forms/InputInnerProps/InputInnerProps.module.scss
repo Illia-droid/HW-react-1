@@ -1,0 +1,16 @@
+.label{
+    display: block;
+    padding: 1.8rem;
+    position: relative;
+    >*{
+        display: block;
+        padding: 0.7rem;
+    }
+    .error{
+    position: absolute;
+    }
+}
+
+.invalid{
+    background-color: red;
+}
