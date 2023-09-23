@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { ThemeContext, UserContext, LanguageContext } from "./contexts";
 import "./App.css";
 import Header from "./components/Header";
@@ -7,58 +7,45 @@ import { BrowserRouter } from "react-router-dom";
 import { THEMES } from "./constants";
 import { LANGUAGE } from "./constants";
 import Main from "./components/Main";
-import LearnHooks from "./components/LearnHooks";
+// import LearnHooks from "./components/LearnHooks";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {
-        id: 1,
-        firstName: "Brad",
-        lastName: "Pitt",
-        isSelect: false,
-        avatar: "https://api.ambr.top/assets/UI/UI_AvatarIcon_PlayerBoy.png",
-      },
-      theme: THEMES.LIGHT,
-      language: LANGUAGE.ENGLISH,
-    };
-  }
+const App = (props) => {
+  const [theme, setTheme] = useState(THEMES.LIGHT);
+  const [language, setLanguage] = useState(LANGUAGE.ENGLISH);
+  const [user, setUser] = useState({
+    id: 1,
+    firstName: "Brad",
+    lastName: "Pitt",
+    isSelect: false,
+    avatar: "https://api.ambr.top/assets/UI/UI_AvatarIcon_PlayerBoy.png",
+  });
 
-  changeTheme = () => {
-    this.setState({
-      theme: this.state.theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT,
-    });
+  const changeTheme = () => {
+    setTheme(theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT);
   };
-  changeLanguage = () => {
-    this.setState({
-      language:
-        this.state.language === LANGUAGE.ENGLISH
-          ? LANGUAGE.UKRAINIAN
-          : LANGUAGE.ENGLISH,
-    });
-  };
-  selectUser = (id) => {
-    this.setState({
-      user: { ...this.state.user, isSelect: !this.state.user.isSelect },
-    });
-  };
-  render() {
-    const { user, theme, language } = this.state;
-    return (
-      <LanguageContext.Provider value={[language, this.changeLanguage]}>
-        <ThemeContext.Provider value={[theme, this.changeTheme]}>
-          <UserContext.Provider value={{ user, selectUser: this.selectUser }}>
-            <BrowserRouter>
-              <Header />
-              <LearnHooks />
-              <Main />
-              <Footer />
-            </BrowserRouter>
-          </UserContext.Provider>
-        </ThemeContext.Provider>
-      </LanguageContext.Provider>
+  const changeLanguage = () => {
+    setLanguage(
+      language === LANGUAGE.ENGLISH ? LANGUAGE.UKRAINIAN : LANGUAGE.ENGLISH
     );
-  }
-}
+  };
+  const selectUser = (id) => {
+    setUser({ ...user, isSelect: !user.isSelect });
+  };
+
+  return (
+    <LanguageContext.Provider value={[language, changeLanguage]}>
+      <ThemeContext.Provider value={[theme, changeTheme]}>
+        <UserContext.Provider value={{ user, selectUser: selectUser }}>
+          <BrowserRouter>
+            <Header />
+            {/* <LearnHooks /> */}
+            <Main />
+            <Footer />
+          </BrowserRouter>
+        </UserContext.Provider>
+      </ThemeContext.Provider>
+    </LanguageContext.Provider>
+  );
+};
+
 export default App;

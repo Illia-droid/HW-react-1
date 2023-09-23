@@ -1,13 +1,15 @@
-import React from "react";
-import { withUser } from "../HOCs";
+import React, { useContext } from "react";
+import { UserContext } from "../../contexts";
 
-const Avatar = (props) => {
-  const {user:{avatar}} = props;
-    return (
-      <div>
-        <img src={avatar} alt="avatar" />
-      </div>
-    );
-  };
+const Avatar = () => {
+  const {
+    user: { avatar },
+  } = useContext(UserContext);
+  return (
+    <div>
+      <img src={avatar} alt="avatar" />
+    </div>
+  );
+};
 
-export default withUser(Avatar);
+export default Avatar;

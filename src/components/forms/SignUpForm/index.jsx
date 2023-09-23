@@ -17,7 +17,6 @@ const initialValues = {
 const SignUpForm = () => {
   const onSubmit = (values, formikBag) => {
     console.log(values);
-    // console.log(formikBag);
     formikBag.resetForm();
   };
 

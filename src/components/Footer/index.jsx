@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import cx from "classnames";
 import styles from "./Footer.module.scss";
 import { THEMES } from "../../constants";
-import { withTheme } from "../HOCs";
 import SwitchLanguage from "../SwitchLanguage";
+import { ThemeContext } from "../../contexts";
 
-const Footer = ({ theme }) => {
+const Footer = () => {
+  const [theme] = useContext(ThemeContext);
   const classes = cx(styles.container, {
     [styles.light]: theme === THEMES.LIGHT,
     [styles.dark]: theme === THEMES.DARK,
@@ -20,4 +21,4 @@ const Footer = ({ theme }) => {
   );
 };
 
-export default withTheme(Footer);
+export default Footer;

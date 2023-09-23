@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { LANGUAGE } from "../../constants";
-import { withLanguage } from "../../components/HOCs";
+import { LanguageContext } from "../../contexts";
 
-const LoaderPage = (props) => {
-  const { language } = props;
+const LoaderPage = () => {
+  const [language] = useContext(LanguageContext);
   return (
     <>
       <ul>
@@ -30,4 +30,4 @@ const LoaderPage = (props) => {
   );
 };
 
-export default withLanguage(LoaderPage);
+export default LoaderPage;

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { LANGUAGE } from "../../constants";
-import { withLanguage } from "../HOCs";
-const NavMenu = (props) => {
-  const { language } = props;
+import { LanguageContext } from "../../contexts";
+
+const NavMenu = () => {
+  const [language] = useContext(LanguageContext);
   return (
     <nav>
       <ul>
@@ -48,4 +49,4 @@ const NavMenu = (props) => {
   );
 };
 
-export default withLanguage(NavMenu);
+export default NavMenu;

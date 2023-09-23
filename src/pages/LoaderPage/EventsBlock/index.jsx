@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import LoaderData from "../../../components/LoaderData";
 import { getEventsSON } from "../../../api";
 import ViewEvents from "../../../components/ViewEvents";
 import { LANGUAGE } from "../../../constants";
-import { withLanguage } from "../../../components/HOCs";
+import { LanguageContext } from "../../../contexts";
 
-const EventsBlock = (props) => {
-  const { language } = props;
+const EventsBlock = () => {
+  const [language] = useContext(LanguageContext);
   return (
     <>
       <h2>{language === LANGUAGE.UKRAINIAN ? "Події" : "Events"}: </h2>
@@ -18,4 +18,4 @@ const EventsBlock = (props) => {
   );
 };
 
-export default withLanguage(EventsBlock);
+export default EventsBlock;

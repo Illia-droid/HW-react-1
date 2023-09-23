@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./Home.module.scss";
 import CardUsers from "../../components/CardSection/CardUser";
 import { LANGUAGE } from "../../constants";
-import { withLanguage } from "../../components/HOCs";
+import StopWatchHooks from "../../components/StopWatchHooks";
+import { LanguageContext } from "../../contexts";
 
-const Home = (props) => {
-  const {language} = props;
-    return (
-      <>
-        <div className={styles.spinner}>{language===LANGUAGE.UKRAINIAN?'Домашня':'Home'}</div>
-        <CardUsers />
-      </>
-    );
-  };
+const Home = () => {
+  const [language] = useContext(LanguageContext);
+  return (
+    <>
+      <div className={styles.spinner}>
+        {language === LANGUAGE.UKRAINIAN ? "Домашня" : "Home"}
+      </div>
+      <CardUsers />
+      <StopWatchHooks />
+    </>
+  );
+};
 
-export default withLanguage(Home);
+export default Home;

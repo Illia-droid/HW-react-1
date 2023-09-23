@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import LoaderData from "../../../components/LoaderData";
 import { getProductsSON } from "../../../api";
 import ViewProducts from "../../../components/ViewProducts";
 import { LANGUAGE } from "../../../constants";
-import { withLanguage } from "../../../components/HOCs";
+import { LanguageContext } from "../../../contexts";
 
-const ProductsBlock = (props) => {
-  const { language } = props;
+const ProductsBlock = () => {
+  const [language] = useContext(LanguageContext);
   return (
     <>
       <h2>{language === LANGUAGE.UKRAINIAN ? "Товари" : "Products"}: </h2>
@@ -18,4 +18,4 @@ const ProductsBlock = (props) => {
   );
 };
 
-export default withLanguage(ProductsBlock);
+export default ProductsBlock;

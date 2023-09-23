@@ -7,6 +7,7 @@ import { LANGUAGE } from "../../constants";
 import { withLanguage } from "../HOCs";
 
 class UsersLoader extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -17,6 +18,7 @@ class UsersLoader extends Component {
       currentResults: 5,
     };
   }
+  
   load = () => {
     const { currentPage, currentResults } = this.state;
     this.setState({
@@ -72,7 +74,7 @@ class UsersLoader extends Component {
     if (error) {
       return <Error />;
     }
-    const {language} = this.props;
+    const [language] = this.props;
       return (
         <section className={styles.userSection}>
           <h2>{language === LANGUAGE.UKRAINIAN ? "Користувачі" : "Users"}: </h2>
