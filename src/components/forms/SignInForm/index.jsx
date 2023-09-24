@@ -13,7 +13,7 @@ const initialValue = {
   radio: "",
 };
 
-function SignInForm() {
+const SignInForm = (props) => {
   const [formData, setFormData] = useState({ ...initialValue });
 
   const handleForm = (event) => {
@@ -123,6 +123,6 @@ function SignInForm() {
       <button type="submit">send</button>
     </form>
   );
-}
+};
 
 export default SignInForm;
