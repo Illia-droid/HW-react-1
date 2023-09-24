@@ -15,7 +15,7 @@ const useLoaderData = (loadData) => {
       })
       .finally(() => {
         setIsFetching(false);
-      });
+      });// eslint-disable-next-line
   }, []);
   return { data, isFetching, error };
 };

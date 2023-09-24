@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { THEMES } from "./constants";
 import { LANGUAGE } from "./constants";
 import Main from "./components/Main";
+import StopWatchTimeout from "./components/StopWatchTimeout";
 // import LearnHooks from "./components/LearnHooks";
 
 const App = (props) => {
@@ -38,6 +39,7 @@ const App = (props) => {
         <UserContext.Provider value={{ user, selectUser: selectUser }}>
           <BrowserRouter>
             <Header />
+            <StopWatchTimeout />
             {/* <LearnHooks /> */}
             <Main />
             <Footer />

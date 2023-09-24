@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import cx from "classnames";
 import styles from "./SignInForm.module.css";
 
@@ -10,119 +10,119 @@ const initialValue = {
   passwordValid: true,
   loginValid: true,
   check: false,
-  radio:""
+  radio: "",
 };
 
-class SignInForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...initialValue };
-  }
+function SignInForm() {
+  const [formData, setFormData] = useState({ ...initialValue });
 
-  handleForm = (event) => {
+  const handleForm = (event) => {
     event.preventDefault();
-    this.setState({ ...initialValue });
+    setFormData({ ...initialValue });
   };
 
-  handleInput = ({ target: { name, value } }) => {
-    this.setState({
+  const handleInput = ({ target: { name, value } }) => {
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
       [`${name}Valid`]: !value.includes(" "),
-    });
+    }));
   };
 
-  handleCheckbox = ({ target: { name, checked } }) => {
-    this.setState({
+  const handleCheckbox = ({ target: { name, checked } }) => {
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: checked,
-    });
+    }));
   };
 
-  handleRadio = ({ target: { name, value } }) => {
-    this.setState({
+  const handleRadio = ({ target: { name, value } }) => {
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
   };
 
-  handleClearRadio = () => {
-    this.setState({ radio: "" });
+  const handleClearRadio = () => {
+    setFormData((prevData) => ({
+      ...prevData,
+      radio: "",
+    }));
   };
 
-  render() {
-    const {
-      email,
-      password,
-      login,
-      emailValid,
-      passwordValid,
-      loginValid,
-      check,
-      radio
-    } = this.state;
-    const classEmail = cx(styles.input, { [styles.invalid]: !emailValid });
-    const classPassword = cx(styles.input, {
-      [styles.invalid]: !passwordValid,
-    });
-    const classLogin = cx(styles.input, { [styles.invalid]: !loginValid });
+  const {
+    email,
+    password,
+    login,
+    emailValid,
+    passwordValid,
+    loginValid,
+    check,
+    radio,
+  } = formData;
 
-    return (
-      <form className={styles.form} onSubmit={this.handleForm}>
+  const classEmail = cx(styles.input, { [styles.invalid]: !emailValid });
+  const classPassword = cx(styles.input, { [styles.invalid]: !passwordValid });
+  const classLogin = cx(styles.input, { [styles.invalid]: !loginValid });
+
+  return (
+    <form className={styles.form} onSubmit={handleForm}>
+      <input
+        className={classLogin}
+        value={login}
+        onChange={handleInput}
+        type="text"
+        name="login"
+        placeholder="your login"
+      />
+      <input
+        className={classEmail}
+        value={email}
+        onChange={handleInput}
+        type="email"
+        name="email"
+        placeholder="your email"
+      />
+      <input
+        className={classPassword}
+        value={password}
+        onChange={handleInput}
+        type="password"
+        name="password"
+        placeholder="your password"
+      />
+      <input
+        type="checkbox"
+        name="check"
+        checked={check}
+        onChange={handleCheckbox}
+      />
+      <label>
+        Radio 1
         <input
-          className={classLogin}
-          value={login}
-          onChange={this.handleInput}
-          type="text"
-          name="login"
-          placeholder="your login"
+          type="radio"
+          name="radio"
+          value="Radio1"
+          checked={radio === "Radio1"}
+          onChange={handleRadio}
         />
+      </label>
+      <label>
+        Radio 2
         <input
-          className={classEmail}
-          value={email}
-          onChange={this.handleInput}
-          type="email"
-          name="email"
-          placeholder="your email"
+          type="radio"
+          name="radio"
+          value="Radio2"
+          checked={radio === "Radio2"}
+          onChange={handleRadio}
         />
-        <input
-          className={classPassword}
-          value={password}
-          onChange={this.handleInput}
-          type="password"
-          name="password"
-          placeholder="your password"
-        />
-        <input
-          type="checkbox"
-          name="check"
-          checked={check}
-          onChange={this.handleCheckbox}
-        />
-        <label>
-          Radio 1
-          <input
-            type="radio"
-            name="radio"
-            value="Radio1"
-            checked={radio === "Radio1"}
-            onChange={this.handleRadio}
-          />
-        </label>
-        <label>
-          Radio 2
-          <input
-            type="radio"
-            name="radio"
-            value="Radio2"
-            checked={radio === "Radio2"}
-            onChange={this.handleRadio}
-          />
-        </label>
-        <button type="button" onClick={this.handleClearRadio}>
+      </label>
+      <button type="button" onClick={handleClearRadio}>
         Clear radio buttons
       </button>
-        <button type="submit">send</button>
-      </form>
-    );
-  }
+      <button type="submit">send</button>
+    </form>
+  );
 }
 
 export default SignInForm;

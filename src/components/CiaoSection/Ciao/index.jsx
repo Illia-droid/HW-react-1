@@ -1,8 +1,8 @@
-import { Component } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./Ciao.module.scss";
 
-class Ciao extends Component {
+const Ciao = (props) => {
   /**
    *
    * @param {object} props
@@ -10,31 +10,23 @@ class Ciao extends Component {
    * @param {string} props.name
    * @param {string} props.lname
    */
-  constructor(props) {
-    super(props);
-    this.state = {
-      isHi: true,
-    };
-  }
 
-  handleBnt = () => {
-    const { isHi } = this.state;
-    this.setState({ isHi: !isHi });
+  const [isHi, setIsHi] = useState(true);
+
+  const handleBnt = () => {
+    setIsHi(!isHi);
   };
 
-  render() {
-    const { name, lname, id } = this.props;
-    const { isHi } = this.state;
-    return (
-      <h2 className={styles.container}>
-        <span>
-          {isHi ? "hi" : "bye"}, {name} {lname} id={id}
-        </span>
-        <button onClick={this.handleBnt}>switch</button>
-      </h2>
-    );
-  }
-}
+  const { name, lname, id } = props;
+  return (
+    <h2 className={styles.container}>
+      <span>
+        {isHi ? "hi" : "bye"}, {name} {lname} id={id}
+      </span>
+      <button onClick={handleBnt}>switch</button>
+    </h2>
+  );
+};
 
 Ciao.propTypes = {
   name: PropTypes.string.isRequired,

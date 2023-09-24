@@ -1,6 +1,6 @@
 import React from "react";
 import UsersLoader from "../../components/UsersLoader";
-const UsersPage = () => {
+const UsersPage = (props) => {
   return (
     <div>
       <UsersLoader />

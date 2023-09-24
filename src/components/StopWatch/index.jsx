@@ -1,56 +1,49 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./StopWatch.module.css";
+const StopWatch = () => {
+  const [time, setTime] = useState(new Date(0, 0, 0, 0, 0, 0));
+  const [idInterval, setIdInterval] = useState(null);
 
-class StopWatch extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      time: new Date(0, 0, 0, 0, 0, 0),
-    };
-    this.idInterval = null;
-  }
-  tick = () => {
-    this.setState((state) => {
-      const { time } = state;
-      const newTime = new Date(time);
+  const tick = () => {
+    setTime((prevTime) => {
+      const newTime = new Date(prevTime);
       newTime.setSeconds(newTime.getSeconds() + 1);
-      return { time: newTime };
+      return newTime;
     });
   };
 
-  start = () => {
-    if (this.idInterval === null) {
-      this.idInterval = setInterval(this.tick, 1000);
+  const start = () => {
+    if (idInterval === null) {
+      setIdInterval(setInterval(tick, 1000));
     }
   };
-  reset = () => {
-    this.stop();
-    this.setState({
-      time: new Date(0, 0, 0, 0, 0, 0),
-    });
-  };
-  stop = () => {
-    clearInterval(this.idInterval);
-    this.idInterval = null;
+
+  const reset = () => {
+    stop();
+    setTime(new Date(0, 0, 0, 0, 0, 0));
   };
 
-  componentWillUnmount() {
-    this.stop();
-  }
+  const stop = () => {
+    clearInterval(idInterval);
+    setIdInterval(null);
+  };
 
-  render() {
-    const { time } = this.state;
-    return (
-      <article className={styles.container}>
-        <h2>{time.toLocaleTimeString("en-GB")}</h2>
-        <div>
-          <button onClick={this.start}>start</button>
-          <button onClick={this.reset}>reset</button>
-          <button onClick={this.stop}>stop</button>
-        </div>
-      </article>
-    );
-  }
-}
+  useEffect(() => {
+    return () => {
+      stop();
+    };
+  }, []);
+
+  return (
+    <article className={styles.container}>
+      <h2>{time.toLocaleTimeString("en-GB")}</h2>
+      <div>
+        <button onClick={start}>start</button>
+        <button onClick={reset}>reset</button>
+        <button onClick={stop}>stop</button>
+      </div>
+    </article>
+  );
+};
 
 export default StopWatch;

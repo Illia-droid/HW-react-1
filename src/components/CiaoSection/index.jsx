@@ -1,49 +1,43 @@
-import { Component } from "react";
+import { useState } from "react";
 import CiaoList from "./CiaoList";
 import CiaoHeading from "./CiaoHeading";
 import { USERS } from "../../constants";
 import CiaoSort from "./CiaoSort";
 
-class CiaoSection extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      users: USERS,
-      isSortIdUp: true,
-      isSortFirstNameUp: true,
-      isSortLastNameUp: true,
-    };
-  }
+const CiaoSection = (props) => {
+  const [users, setUsers] = useState(USERS);
+  const [isSortIdUp, setIsSortIdUp] = useState(true);
+  const [isSortFirstNameUp, setIsSortFirstNameUp] = useState(true);
+  const [isSortLastNameUp, setIsSortLastNameUp] = useState(true);
 
-  setSortId = (newUsers) => {
-    this.setState({ users: newUsers, isSortIdUp: !this.state.isSortIdUp });
+  const setSortId = (newUsers) => {
+    setUsers(newUsers);
+    setIsSortIdUp(!isSortIdUp);
   };
-  setSortFirstName = (newUsers) => {
-    this.setState({ users: newUsers, isSortFirstNameUp: !this.state.isSortFirstNameUp });
+  const setSortFirstName = (newUsers) => {
+    setUsers(newUsers);
+    setIsSortFirstNameUp(!isSortFirstNameUp);
   };
-  setSortLastName = (newUsers) => {
-    this.setState({ users: newUsers, isSortLastNameUp: !this.state.isSortLastNameUp });
+  const setSortLastName = (newUsers) => {
+    setUsers(newUsers);
+    setIsSortLastNameUp(!isSortLastNameUp);
   };
 
-  render() {
-    const { users, isSortIdUp, isSortFirstNameUp, isSortLastNameUp } =
-      this.state;
-    return (
-      <>
-        <CiaoHeading />
-        <CiaoSort
-          users={users}
-          setSortId={this.setSortId}
-          setSortFirstName={this.setSortFirstName}
-          setSortLastName={this.setSortLastName}
-          isSortIdUp={isSortIdUp}
-          isSortFirstNameUp={isSortFirstNameUp}
-          isSortLastNameUp={isSortLastNameUp}
-        />
-        <CiaoList users={users} />
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <CiaoHeading />
+      <CiaoSort
+        users={users}
+        setSortId={setSortId}
+        setSortFirstName={setSortFirstName}
+        setSortLastName={setSortLastName}
+        isSortIdUp={isSortIdUp}
+        isSortFirstNameUp={isSortFirstNameUp}
+        isSortLastNameUp={isSortLastNameUp}
+      />
+      <CiaoList users={users} />
+    </>
+  );
+};
 
 export default CiaoSection;
