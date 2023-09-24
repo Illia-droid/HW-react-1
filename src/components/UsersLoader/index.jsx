@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./UsersLoader.module.scss";
 import { getUsers } from "../../api";
 import Error from "../Error";
@@ -10,16 +10,6 @@ const UsersLoader = (props) => {
   const [isFetching, setIsFetching] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentResults, setCurrentResults] = useState(5);
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     users: [],
-  //     error: false,
-  //     isFetching: false,
-  //     currentPage: 1,
-  //     currentResults: 5,
-  //   };
-  // }
 
   const load = () => {
     setIsFetching(true);
@@ -42,21 +32,6 @@ const UsersLoader = (props) => {
     load(); // eslint-disable-next-line
   }, [currentPage, currentResults]);
 
-  // useEffect((prevProps, prevState) => {
-  //   load()
-  // }, []);
-  // componentDidMount() {
-  //   this.load();
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (
-  //     this.state.currentPage !== prevState.currentPage ||
-  //     this.state.currentResults !== prevState.currentResults
-  //   ) {
-  //     this.load();
-  //   }
-  // }
   const prevPage = () => {
     if (currentPage > 1) {
       setCurrentPage((currentPage) => currentPage - 1);

@@ -31,7 +31,7 @@ const StopWatch = () => {
   useEffect(() => {
     return () => {
       stop();
-    };
+    }; // eslint-disable-next-line
   }, []);
 
   return (
