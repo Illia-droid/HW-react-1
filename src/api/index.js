@@ -24,8 +24,8 @@ export const getUsers = (options = {}) => {
 export const getUserJSON = () =>
   fetch("/data/users.json").then((res) => res.json());
 
-  export const getEventsSON = () =>
+  export const getEventsJSON = () =>
   fetch("/data/events.json").then((res) => res.json());
 
-  export const getProductsSON = () =>
+  export const getProductsJSON = () =>
   fetch("/data/products.json").then((res) => res.json());

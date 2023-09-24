@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { DarkMode, LightMode } from "@mui/icons-material";
 import { ThemeContext } from "../../contexts";
-import { THEMES } from "../../constants";
-// import { withTheme } from "../HOCs";
+import { THEMES } from "../../constants"; 
 
 const SwitchTheme = () => {
   const [theme, changeTheme] = useContext(ThemeContext);

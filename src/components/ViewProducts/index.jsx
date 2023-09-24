@@ -1,9 +1,11 @@
 import React from "react";
 import Error from "../Error";
 import Spinner from "../Spinner";
+import { useLoaderData } from "../../hooks";
+import { getProductsJSON } from "../../api";
 
 const ViewProducts = (props) => {
-  const { state:{data, isFetching, error} } = props;
+  const { data, isFetching, error } = useLoaderData(getProductsJSON);
   if (error) {
     return <Error />;
   }
