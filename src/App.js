@@ -8,36 +8,31 @@ import { THEMES } from "./constants";
 import { LANGUAGE } from "./constants";
 import Main from "./components/Main";
 import StopWatchTimeout from "./components/StopWatchTimeout";
+import { useAuthUser, useTheme, useClicker } from "./hooks";
 // import LearnHooks from "./components/LearnHooks";
 
 const App = (props) => {
-  const [theme, setTheme] = useState(THEMES.LIGHT);
   const [language, setLanguage] = useState(LANGUAGE.ENGLISH);
-  const [user, setUser] = useState({
+  const { user, selectUser } = useAuthUser({
     id: 1,
     firstName: "Brad",
     lastName: "Pitt",
     isSelect: false,
     avatar: "https://api.ambr.top/assets/UI/UI_AvatarIcon_PlayerBoy.png",
   });
-
-  const changeTheme = () => {
-    setTheme(theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT);
-  };
+  // const { theme, changeTheme } = useTheme(THEMES.LIGHT);
   const changeLanguage = () => {
     setLanguage(
       language === LANGUAGE.ENGLISH ? LANGUAGE.UKRAINIAN : LANGUAGE.ENGLISH
     );
   };
-  const selectUser = (id) => {
-    setUser({ ...user, isSelect: !user.isSelect });
-  };
 
   return (
     <LanguageContext.Provider value={[language, changeLanguage]}>
-      <ThemeContext.Provider value={[theme, changeTheme]}>
+      <ThemeContext.Provider value={useTheme(THEMES.LIGHT)}>
         <UserContext.Provider value={{ user, selectUser: selectUser }}>
           <BrowserRouter>
+            <p>{useClicker()}</p>
             <Header />
             <StopWatchTimeout />
             {/* <LearnHooks /> */}

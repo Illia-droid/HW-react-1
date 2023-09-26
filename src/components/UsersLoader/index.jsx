@@ -1,49 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./UsersLoader.module.scss";
 import { getUsers } from "../../api";
 import Error from "../Error";
 import Spinner from "../Spinner";
+import { useUsers } from "../../hooks";
 
 const UsersLoader = (props) => {
-  const [users, setUsers] = useState([]);
-  const [error, setError] = useState(false);
-  const [isFetching, setIsFetching] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [currentResults, setCurrentResults] = useState(5);
-
-  const load = () => {
-    setIsFetching(true);
-    getUsers({ page: currentPage, results: currentResults })
-      .then((data) => {
-        if (data.error) {
-          throw new Error();
-        }
-        setUsers(data.results);
-      })
-      .catch((error) => {
-        setError(error);
-      })
-      .finally(() => {
-        setIsFetching(false);
-      });
-  };
-
-  useEffect(() => {
-    load(); // eslint-disable-next-line
-  }, [currentPage, currentResults]);
-
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((currentPage) => currentPage - 1);
-    }
-  };
-
-  const nextPage = () => setCurrentPage((currentPage) => currentPage + 1);
-
-  const handleChangeCurrentResults = (event) => {
-    setCurrentResults(event.target.value);
-  };
-
+  const {
+    users,
+    error,
+    isFetching,
+    currentPage,
+    currentResults,
+    prevPage,
+    nextPage,
+    handleChangeCurrentResults,
+  } = useUsers(getUsers);
   if (error) {
     return <Error />;
   }
