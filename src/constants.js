@@ -33,3 +33,8 @@ export const LANGUAGE = {
   UKRAINIAN: "UKRAINIAN",
   ENGLISH: "ENGLISH",
 };
+
+export const STATUS_MENU = {
+  OPEN: "OPEN",
+  CLOSE: "CLOSE",
+};

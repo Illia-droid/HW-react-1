@@ -1,0 +1,38 @@
+{
+  "message": [
+    {
+      "id": 1,
+      "body": "text 1",
+      "authorId": 2
+    },
+    {
+      "id": 4,
+      "body": "hi",
+      "authorId": 3
+    },
+    {
+      "id": 11,
+      "body": "bye",
+      "authorId": 3
+    },
+    {
+      "id": 7,
+      "body": "text 111",
+      "authorId": 1
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "brad"
+    },
+    {
+      "id": 2,
+      "name": "swat"
+    },
+    {
+      "id": 5,
+      "name": "kum"
+    }
+  ]
+}

@@ -15,6 +15,7 @@ import Home from "../../pages/Home";
 import StopWatch from "../StopWatch";
 import FormsPage from "../../pages/FormsPage";
 import CallbackForm from "../forms/CallbackForm";
+import Chat from "../Chat";
 
 const Main = () => {
   const [theme] = useContext(ThemeContext);
@@ -26,6 +27,7 @@ const Main = () => {
     <main className={classes}>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/chat" element={<Chat />} />
         <Route path="/sign-up" element={<FormsPage />} />
         <Route path="/sign-in" element={<SignInForm />} />
         <Route path="/callback" element={<CallbackForm />} />

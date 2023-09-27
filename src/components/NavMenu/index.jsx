@@ -1,19 +1,48 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
+import cx from "classnames";
 import { LANGUAGE } from "../../constants";
-import { LanguageContext } from "../../contexts";
+import { LanguageContext, MenuContext } from "../../contexts";
+import styles from "./NavMenu.module.scss";
 
 const NavMenu = () => {
   const [language] = useContext(LanguageContext);
+  const {
+    state: { isMenuOpen },
+    handleCLoseMenu,
+  } = useContext(MenuContext);
+  const navClassesNames = cx(styles.navMenu, { [styles.open]: isMenuOpen });
+  const navRef = useRef(null);
+  useEffect(() => {
+    const handleCLick = ({ target }) => {
+      if (isMenuOpen && navRef.current.contains(target) === false) {
+        handleCLoseMenu();
+      }
+    };
+    window.addEventListener("click", handleCLick);
+    return () => {
+      window.removeEventListener("click", handleCLick);
+    };
+  }, [isMenuOpen]);
   return (
-    <nav>
+    <nav className={navClassesNames} ref={navRef}>
+      <CancelPresentationIcon
+        fontSize="large"
+        className={styles.close}
+        onClick={handleCLoseMenu}
+      />
       <ul>
         <li>
           <NavLink to="/">
             {language === LANGUAGE.UKRAINIAN ? "Домашня" : "Home"}
           </NavLink>
         </li>
-
+        <li>
+          <NavLink to="/chat">
+            {language === LANGUAGE.UKRAINIAN ? "Чат" : "CHat"}
+          </NavLink>
+        </li>
         <li>
           <NavLink to="/sign-up">
             {language === LANGUAGE.UKRAINIAN ? "Зареєструватися" : "Sign Up"}
