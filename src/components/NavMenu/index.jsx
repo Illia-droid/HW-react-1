@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from "react";
+import React, { useContext, useEffect, useId } from "react";
 import { NavLink } from "react-router-dom";
 import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 import cx from "classnames";
@@ -13,20 +13,25 @@ const NavMenu = () => {
     handleCLoseMenu,
   } = useContext(MenuContext);
   const navClassesNames = cx(styles.navMenu, { [styles.open]: isMenuOpen });
-  const navRef = useRef(null);
+
+  const idNav = useId();
+
   useEffect(() => {
     const handleCLick = ({ target }) => {
-      if (isMenuOpen && navRef.current.contains(target) === false) {
+      if (
+        isMenuOpen &&
+        document.getElementById(idNav).contains(target) === false
+      ) {
         handleCLoseMenu();
       }
     };
     window.addEventListener("click", handleCLick);
     return () => {
       window.removeEventListener("click", handleCLick);
-    };
+    }; // eslint-disable-next-line
   }, [isMenuOpen]);
   return (
-    <nav className={navClassesNames} ref={navRef}>
+    <nav className={navClassesNames} id={idNav}>
       <CancelPresentationIcon
         fontSize="large"
         className={styles.close}
